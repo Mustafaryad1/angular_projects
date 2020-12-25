@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+.red-class{
+  color: red;
+}
+.red-counter{
+  color: red;
+  font-size: 18px;
+}
+.green-counter{
+  font-size:18px;
+  color: green;
+}
+.task-done{
+  text-decoration: line-through;
+  background-color: teal;
+}

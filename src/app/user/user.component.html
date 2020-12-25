@@ -1,0 +1,15 @@
+<div class="container">
+  <h1 >Welcome {{ firstName }}</h1>
+  <p>your email {{ email }}</p>
+  <p> {{age}} </p>
+</div>
+<!-- <input type="text" [(ngModel)]="" > -->
+<!-- change class depend on expression -->
+<h2 [ngClass]="{'red-class': age <=20}">{{ firstName}}</h2> 
+<input [hidden]="age>60" type="number">
+<input *ngIf="age>50" type="text">
+<input type="text" [(ngModel)]="firstName">
+<!-- <img [src] ="imgurl" width="400px">
+ -->
+ <input (keyup)="changeFirstName(inputFirstName.value)" #inputFirstName>
+ <button (click)="changeAge(age)">Change age </button>

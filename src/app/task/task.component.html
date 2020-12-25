@@ -1,0 +1,36 @@
+<h1>To-Do-List Project</h1>
+<div class="container">
+  <p></p>
+  <div class="row">
+    <div class="col-md-8">
+
+      <input #inputTaskText type="text" placeholder="put your task text here" style="width: 100%;">
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-success" (click)="addTask(inputTaskText.value)">Add</button>
+    </div>
+  </div>
+  <div class="row p-4 mt-5 border  border-dark">
+    <span [ngClass]="{'red-counter': counter>3,'green-counter':counter<=3}" 
+          class="badge badge-light">{{counter}}</span>
+    <div class="col-md-12">
+      <div *ngFor="let task of tasks index as i">
+      <div class="row border border-primary p-2 m-4">
+        <div class="col-md-1">
+          <input (click)="checkTask(inputchecktask.checked,i)" type="checkbox" #inputchecktask>
+        </div>
+        <div class="col-md-6">
+          <p [ngClass]="{'task-done': task.done}" style="width: 100%;">
+            <!-- {{task.name}} -->
+            {{task.name}} 
+          </p>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-danger"
+           (click)="deleteTask(i)">delete</button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
