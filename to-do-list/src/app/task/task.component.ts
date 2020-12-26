@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskClass } from './task';
 
+
+
 @Component({
   selector: 'task',
   templateUrl: './task.component.html',
@@ -8,21 +10,36 @@ import { TaskClass } from './task';
 })
 export class TaskComponent implements OnInit {
   tasks:TaskClass[]=[]
-  
+  issue :string=""
   constructor() { }
 
   ngOnInit(): void {
   }
+  compare( a:TaskClass, b:TaskClass ) {
+    if ( a.done < b.done ){
+      return -1;
+    }
+    if ( a.done > b.done ){
+      return 1;
+    }
+    return 0;
+  }
 counter = 0;
   addTask(taskName:string){
     if(taskName){
-    let exist = this.tasks.filter(function(item){return item.name===taskName})
-    if(exist.length===0){
+    let exist = this.tasks.filter(function(task){return task.name===taskName}) //[{taskmustafa}] 
+    if(exist.length === 0){
     let task:TaskClass = new TaskClass();
     task.name = taskName;
-    this.tasks.push(task)
-    this.counter +=1; 
+    // this.tasks.push(task)
+    this.counter +=1;
+    this.tasks.unshift(task)
+    this.tasks.sort(this.compare)
+    }else{
+      this.issue = "Task exists"
     }
+  }else{
+    this.issue = "can't add empty task"
   }
   }
  
@@ -36,12 +53,8 @@ counter = 0;
   }
   
   checkTask(checked:boolean,index:number){
-    if(checked){
-      this.counter -=1
-      this.tasks[index].done=true;
-    }else{
-      this.counter +=1
-      this.tasks[index].done=false;
-    }
+   this.counter = (checked)?--this.counter:++this.counter;
+   this.tasks[index].done = (checked)?true:false;
+   this.tasks.sort(this.compare)
   }
 }
